@@ -8,7 +8,7 @@ To compile/run your program, run:
 
     :VERun 
 
-For further information and configuration, check the help file in the doc folder
+For further information and configuration, check [help file](doc/verun.txt) in the doc folder
 
 Author: jessenzr@gmail.com
 Please feel free to contact me for suggestions, critics or anything :)
