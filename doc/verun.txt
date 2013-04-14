@@ -1,0 +1,76 @@
+*VERun*
+Easily run/compile your files inside vim.
+
+The main goal of VERun is to run your program with just one command without leaving vim. You just open the file you want to run and execute |:VERun|.
+
+
+*VERunFeatures*
+
+Main features included in this version:
+- Runs C/C++, php, python, bash/sh and makefiles with just one command, without needing to cd your dir nor configuring anything
+- Auto detect your C/C++ headers and adds the links to the g++ command (see VECppAutoHeaderList)
+- Auto detect your python version
+- Option to execute your program in an external terminal
+- Currently supports only C/C++, php, python, bash/sh and makefiles
+
+
+*VERunCommands*
+To compile/run your program, run: *:VERun*
+	:VERun
+
+To make & run your project using makefile, run: *:VERunMake*
+	:VERunMake
+
+
+VERun configuration options:
+
+*VECppAutoHeaders*
+- If non-zero, VERun will check the #include lines in your c file and try to match the link in the VECppAutoHeaderList variable. (default: 1)
+	let g:VECppAutoHeaders=1 " globally
+	let w:VECppAutoHeaders=1 " locally
+
+*VECppAutoHeaderList*
+- Defines the list of the links to check if VECppAutoHeaders is non-zero
+	let g:VECppAutoHeaderList={"ncurses.h": "ncurses", "libusb-1.0/libusb.h": "usb-1.0"} "globally
+	let w:VECppAutoHeaderList={"ncurses.h": "ncurses", "libusb-1.0/libusb.h": "usb-1.0"} "locally
+
+*VEGppArgs*
+- Set g++ extra args globally  (default: empty)
+	let g:VEGppArgs="-l nucrses" " globally
+	let w:VEGppArgs="-l ncurses" " locally
+
+*VEMakeRun*
+- Set what file to execute after make. (default: name of your file without extension)
+	let g:VEMakeRun="/path/to/your/file" " globally
+	let w:VEMakeRun="/path/to/your/file" " locally
+
+*VEAutosave*
+- If non-zero, will auto save your files before running (default: 1)
+	let g:VEAutosave=1 " globally
+	let w:VEAutosave=1 " locally
+
+*VEPythonVer*
+- Define your python version. If set to auto, VERun will check if the version is defined in the head of the file (!#/usr/bin/python2). If verun does not find it, will run python without specifying the version. (default: auto)
+	let g:VEPythonVer="auto" " globally
+	let w:VEPythonVer="auto" " locally
+
+*VEExternalTerminal*
+- If non-zero, will run your program in an external terminal (default: 0)
+	let g:VEExternalTerm=0 " globally
+	let w:VEExternalTerm=0 " locally
+
+*VETerm*
+- Set the terminal you want to use if VEExternalTerm is non-zero (default: "xterm -e")
+	let g:VETerm="xterm -e" " globally
+	let w:VETerm="xterm -e" " locally
+
+*VEAutoClear*
+- If non-zero, the output will be cleared from previous commands before executing (default: 1)
+	let g:VEAutoClear=1 " globally
+	let w:VEAutoClear=1 " locally
+
+
+*VERunAbout*
+Author: jessenzr at gmail dot com
+Please feel free to contact me for suggestions, critics or anything :)
+The latest version can be found on https://code.google.com/p/vim-easyrun/source/checkout
