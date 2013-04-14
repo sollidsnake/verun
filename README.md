@@ -10,7 +10,7 @@ Main features included in this version:
 - Option to execute your program in an external terminal 
 - Currently supports only C/C++, php, python, bash/sh and makefiles
 
-To compile/run your program, run:
+To compile/run your program, run:<br>
     :VERun 
 
 For further information and configuration, check [help file](doc/verun.txt) in the doc folder
