@@ -1,5 +1,5 @@
-VERun
-Easily run/compile your files inside vim.
+#VERun
+###Easily run/compile your files inside vim.
 
 The main goal of VERun is to run your program with just one command without leaving vim. You just open the file you want to run and execute :VERun.
 
@@ -11,7 +11,8 @@ Main features included in this version:
 - Currently supports only C/C++, php, python, bash/sh and makefiles
 
 To compile/run your program, run:<br>
-    :VERun 
+> :VERun 
+
 
 For further information and configuration, check [help file](doc/verun.txt) in the doc folder
 
