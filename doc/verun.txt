@@ -73,4 +73,4 @@ VERun configuration options:
 *VERunAbout*
 Author: jessenzr at gmail dot com
 Please feel free to contact me for suggestions, critics or anything :)
-The latest version can be found on https://code.google.com/p/vim-easyrun/source/checkout
+The latest version can be found on https://github.com/sollidsnake/verun

@@ -9,6 +9,7 @@ let g:VEGppArg=""
 let g:VEMakeRun=""
 let g:VEPythonVer="auto"
 let g:VEAutoClear=1
+let g:VEExecArg=""
 
 if has("gui_running")
   let g:VEExternalTerm=1
@@ -21,5 +22,5 @@ let g:VECppAutoHeaders=1
 let g:VECppAutoHeaderList={"ncurses.h": "ncurses", "libusb-1.0/libusb.h": "usb-1.0"}
 
 " default commands
-command VERun call verun#Compile(1, 0)
-command VERunMake call verun#Compile(1, 1)
+command! VERun call verun#Compile(1, 0)
+command! VERunMake call verun#Compile(1, 1)
