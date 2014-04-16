@@ -120,6 +120,11 @@ function! verun#Compile(run, make)
 
       let l:python = 'python' . l:pyver
       let l:exec = "" . l:python . " " . expand("%:p")
+    elseif &filetype == 'java' "java
+      let l:cmd = "javac " . expand("%:p")
+      let l:result = system(l:cmd)
+      let l:exec = "cd " . expand("%:p:h") . " && java " . expand("%:t:r")
+      echom l:exec
     else
       echom s:VEName . ": " .  &filetype . " is not implemeneted (yet)"
       return 0
