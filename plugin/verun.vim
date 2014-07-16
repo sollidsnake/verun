@@ -5,6 +5,7 @@
 
 " config variables
 let g:VEAutosave=1
+let g:VEUseEclim=1
 let g:VEGppArg=""
 let g:VEMakeRun=""
 let g:VEPythonVer="auto"

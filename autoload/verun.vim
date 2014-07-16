@@ -76,6 +76,8 @@ function! verun#Compile(run, make)
     return 0
   endif
 
+  let l:exec_external = "!"
+
   if s:TreatLocalVar('VEAutosave', 1) " check if auto save is enabled
     write
   endif
@@ -121,10 +123,16 @@ function! verun#Compile(run, make)
       let l:python = 'python' . l:pyver
       let l:exec = "" . l:python . " " . expand("%:p")
     elseif &filetype == 'java' "java
-      let l:cmd = "javac " . expand("%:p")
-      let l:result = system(l:cmd)
-      let l:exec = "cd " . expand("%:p:h") . " && java " . expand("%:t:r")
-      echom l:exec
+      let l:use_eclim = s:TreatLocalVar("VEUseEclim", "1")
+      if l:use_eclim == 1
+        let l:exec = "Java " . expand("%")
+        let l:exec_external = ""
+      else
+        let l:cmd = "javac " . expand("%:p")
+        let l:result = system(l:cmd)
+        let l:exec = "cd " . expand("%:p:h") . " && java " . expand("%:t:r")
+        echom l:exec
+      endif
     else
       echom s:VEName . ": " .  &filetype . " is not implemeneted (yet)"
       return 0
@@ -145,7 +153,11 @@ function! verun#Compile(run, make)
       let l:clear = ""
     endif
 
-    exec l:silent . "!" . l:clear . l:exec . l:execArg
+    if l:exec_external == "!"
+      exec l:silent . l:exec_external . l:clear . l:exec . l:execArg
+    else
+      exec l:silent l:exec
+    endif
     " wait for keypress after execution inside gvim
     if has("gui_running") && !s:TreatLocalVar('VEExternalTerm', g:VEExternalTerm) 
       call getchar()
