@@ -92,7 +92,7 @@ function! verun#Compile(run, make)
     let l:exec = "" . l:runfile
   else " if not using makefile check the filetype
     let l:execArg = " " . s:TreatLocalVar("VEExecArg", g:VEExecArg)
-    if &filetype == "cpp"
+    if &filetype == "cpp" || &filetype == "c"
       let l:file = expand("%:p") " file dir
       let l:exec = expand("%:p:r:s") " exec dir
 
