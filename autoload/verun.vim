@@ -92,9 +92,16 @@ function! verun#Compile(run, make)
     let l:exec = "" . l:runfile
   else " if not using makefile check the filetype
     let l:execArg = " " . s:TreatLocalVar("VEExecArg", g:VEExecArg)
-    if &filetype == "cpp" || &filetype == "c"
+
+    if &filetype == "cpp" || &filetype == "c" " c/c++
       let l:file = expand("%:p") " file dir
       let l:exec = expand("%:p:r:s") " exec dir
+
+      if &filetype == "c"
+        let l:compiler = "gcc"
+      else
+        let l:compiler = "g++"
+      endif
 
       let l:gppArg = s:TreatLocalVar("VEGppArg", g:VEGppArg)
       let l:cpphead = s:TreatLocalVar("VECppAutoHeaders", g:VECppAutoHeaders)
@@ -103,7 +110,7 @@ function! verun#Compile(run, make)
       endif
 
       " Compile and store result
-      let l:cmd = "g++ -Wall " . l:file . " -o " . l:exec . " " . l:gppArg
+      let l:cmd = l:compiler . " -Wall " . l:file . " -o " . l:exec . " " . l:gppArg
       let l:result = system(l:cmd)
       if !empty(s:CheckCppErrors(l:cmd, l:result)) " check compilation errors
         return 1
