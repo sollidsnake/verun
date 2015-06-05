@@ -103,20 +103,22 @@ function! verun#Compile(run, make)
         let l:compiler = "g++"
       endif
 
-      let l:gppArg = s:TreatLocalVar("VEGppArg", g:VEGppArg)
+      let l:gppArgs = s:TreatLocalVar("VEGppArgs", g:VEGppArgs)
       let l:cpphead = s:TreatLocalVar("VECppAutoHeaders", g:VECppAutoHeaders)
+      
       if l:cpphead
-        let l:gppArg .= " " . s:GetCppHeaders()
+        let l:gppArgs .= " " . s:GetCppHeaders()
       endif
 
       " Compile and store result
-      let l:cmd = l:compiler . " -Wall " . l:file . " -o " . l:exec . " " . l:gppArg
+      let l:cmd = l:compiler . " -Wall " . l:file . " -o " . l:exec . " " . l:gppArgs
       let l:result = system(l:cmd)
       if !empty(s:CheckCppErrors(l:cmd, l:result)) " check compilation errors
         return 1
       else
         let l:exec = "" . l:exec
       endif
+
     elseif &filetype == "php" " php
       let l:exec = "php -e " . expand("%:p")
     elseif &filetype == "sh" " sh
