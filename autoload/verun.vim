@@ -94,7 +94,7 @@ function! verun#Compile(run, make)
     let l:execArg = " " . s:TreatLocalVar("VEExecArg", g:VEExecArg)
 
     if &filetype == "cpp" || &filetype == "c" " c/c++
-      let l:file = expand("%:p") " file dir
+      let l:file = " \"" . expand("%:p") . "\"" " file dir
       let l:exec = expand("%:p:r:s") " exec dir
 
       if &filetype == "c"
@@ -120,9 +120,9 @@ function! verun#Compile(run, make)
       endif
 
     elseif &filetype == "php" " php
-      let l:exec = "php -e " . expand("%:p")
+      let l:exec = "php -e " . " \"" . expand("%:p") . "\""
     elseif &filetype == "sh" " sh
-      let l:exec = "sh " . expand("%:p")
+      let l:exec = "sh " . " \"" . expand("%:p") . "\""
     elseif &filetype == "python" " python
       let l:pyver = s:TreatLocalVar("VEPythonVer", "")
       if l:pyver=="auto"
@@ -130,16 +130,16 @@ function! verun#Compile(run, make)
       endif
 
       let l:python = 'python' . l:pyver
-      let l:exec = "" . l:python . " " . expand("%:p")
+      let l:exec = "" . l:python . " \"" . expand("%:p") . "\""
     elseif &filetype == 'java' "java
       let l:use_eclim = s:TreatLocalVar("VEUseEclim", "1")
       if l:use_eclim == 1
         let l:exec = "Java " . expand("%")
         let l:exec_external = ""
       else
-        let l:cmd = "javac " . expand("%:p")
+        let l:cmd = "javac " . " \"" . expand("%:p") . "\""
         let l:result = system(l:cmd)
-        let l:exec = "cd " . expand("%:p:h") . " && java " . expand("%:t:r")
+        let l:exec = "cd " . " \"" . expand("%:p:h") . "\"" . " && java " . expand("%:t:r")
         echom l:exec
       endif
     else
