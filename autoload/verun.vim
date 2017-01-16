@@ -85,17 +85,17 @@ function! verun#Compile(run, make)
   " big if
   if !empty(a:make) " check if makefile will be used
     let l:dir = expand("%:p:h")
-    let l:cmd = "make -B -C " . l:dir
+    let l:cmd = "make -B -C " . '"' . l:dir . '"'
     let l:result = system(l:cmd)
 
     let l:runfile = s:TreatLocalVar("VEMakeRun", expand("%:p:r:s"))
-    let l:exec = "" . l:runfile
+    let l:exec = "" . '"' . l:runfile . '"'
   else " if not using makefile check the filetype
     let l:execArg = " " . s:TreatLocalVar("VEExecArg", g:VEExecArg)
 
     if &filetype == "cpp" || &filetype == "c" " c/c++
       let l:file = " \"" . expand("%:p") . "\"" " file dir
-      let l:exec = expand("%:p:r:s") " exec dir
+      let l:exec = '"' . expand("%:p:r:s") . '"' " exec dir
 
       if &filetype == "c"
         let l:compiler = "gcc"
